@@ -7,6 +7,9 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
+  transformIgnorePatterns: [
+    'node_modules/(?!(uncrypto|@upstash/redis)/)',
+  ],
 }
 
 module.exports = createJestConfig(customJestConfig)
