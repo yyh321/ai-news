@@ -1,7 +1,32 @@
-export default function Home() {
+import Header from '@/components/Header'
+import NewsList from '@/components/NewsList'
+import Footer from '@/components/Footer'
+import { getNewsHandler } from '@/lib/handlers/news'
+import { formatDate } from '@/lib/date'
+
+export const revalidate = 3600 // ISR: revalidate every hour
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { date?: string }
+}) {
+  const date = searchParams?.date
+  const { items, date: currentDate } = await getNewsHandler(date)
+
+  // Generate last 7 days for date selector
+  const today = new Date()
+  const availableDates = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(today)
+    d.setDate(d.getDate() - i)
+    return formatDate(d.toISOString())
+  })
+
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="text-2xl font-bold">AI 每日早报</h1>
-    </main>
+    <div className="mx-auto max-w-3xl px-4 py-8">
+      <Header currentDate={currentDate} availableDates={availableDates} />
+      <NewsList items={items} />
+      <Footer />
+    </div>
   )
 }

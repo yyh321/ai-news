@@ -1,4 +1,6 @@
-export const metadata = {
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
   title: 'AI 每日早报',
   description: '每天 10 条最新 AI 新闻',
 }
@@ -10,7 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-      <body className="min-h-screen bg-white text-gray-900">{children}</body>
+      <body className="min-h-screen bg-white text-gray-900 antialiased">
+        {children}
+      </body>
     </html>
   )
 }
