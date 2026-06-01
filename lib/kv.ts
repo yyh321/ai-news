@@ -4,7 +4,11 @@ import { NewsItem } from './types'
 export async function getNewsByDate(date: string): Promise<NewsItem[] | null> {
   const data = await kv.get<string>(`news:daily:${date}`)
   if (!data) return null
-  return JSON.parse(data) as NewsItem[]
+  try {
+    return JSON.parse(data) as NewsItem[]
+  } catch {
+    return null
+  }
 }
 
 export async function setNewsByDate(date: string, items: NewsItem[]): Promise<void> {
