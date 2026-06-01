@@ -7,7 +7,11 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -24,13 +28,14 @@
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.1",
-    "@types/react": "^19.2.15",
+    "@types/react": "^18.3.29",
+    "@types/react-dom": "^18.3.7",
     "@types/xml2js": "^0.4.14",
     "autoprefixer": "^10.5.0",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
     "postcss": "^8.5.15",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^3.4.19",
     "typescript": "^6.0.3",
     "xml2js": "^0.6.2"
   }
