@@ -1,7 +1,11 @@
 export function formatRelativeTime(isoString: string): string {
   const date = new Date(isoString)
+  if (isNaN(date.getTime())) return '未知时间'
+
   const now = new Date()
   const diffMs = now.getTime() - date.getTime()
+  if (diffMs < 0) return '刚刚'
+
   const diffSec = Math.floor(diffMs / 1000)
   const diffMin = Math.floor(diffSec / 60)
   const diffHour = Math.floor(diffMin / 60)
@@ -15,5 +19,6 @@ export function formatRelativeTime(isoString: string): string {
 }
 
 export function formatDate(isoString: string): string {
-  return isoString.slice(0, 10)
+  const d = new Date(isoString)
+  return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10)
 }

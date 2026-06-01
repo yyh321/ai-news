@@ -25,10 +25,25 @@ describe('formatRelativeTime', () => {
     const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
     expect(formatRelativeTime(threeDaysAgo)).toBe('3天前')
   })
+
+  it('returns "刚刚" for future dates', () => {
+    const future = new Date(Date.now() + 60 * 60 * 1000).toISOString()
+    expect(formatRelativeTime(future)).toBe('刚刚')
+  })
+
+  it('returns "未知时间" for invalid date strings', () => {
+    expect(formatRelativeTime('not-a-date')).toBe('未知时间')
+    expect(formatRelativeTime('')).toBe('未知时间')
+  })
 })
 
 describe('formatDate', () => {
   it('formats ISO string to YYYY-MM-DD', () => {
     expect(formatDate('2026-06-01T08:00:00Z')).toBe('2026-06-01')
+  })
+
+  it('returns empty string for invalid date strings', () => {
+    expect(formatDate('not-a-date')).toBe('')
+    expect(formatDate('')).toBe('')
   })
 })
