@@ -4,13 +4,17 @@ import Footer from '@/components/Footer'
 import { getNewsHandler } from '@/lib/handlers/news'
 import { formatDate } from '@/lib/date'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home({
   searchParams,
 }: {
   searchParams: { date?: string }
 }) {
   const date = searchParams?.date
+  console.log('[page] searchParams date:', date)
   const { items, date: currentDate } = await getNewsHandler(date)
+  console.log('[page] rendered items:', items.length, 'currentDate:', currentDate)
 
   // Generate last 7 days for date selector
   const today = new Date()
