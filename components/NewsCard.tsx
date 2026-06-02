@@ -10,7 +10,7 @@ interface NewsCardProps {
 }
 
 const sourceColors: Record<string, string> = {
-  '机器之心': 'bg-source-jiqizhixin',
+  '雷峰网': 'bg-source-leiphone',
   '量子位': 'bg-source-qbitai',
   '搜索补充': 'bg-source-search',
 }

@@ -118,7 +118,7 @@ describe('fetchRSS', () => {
 describe('RSS_SOURCES', () => {
   it('has 4 sources configured', () => {
     expect(RSS_SOURCES).toHaveLength(4)
-    expect(RSS_SOURCES[0].name).toBe('机器之心')
+    expect(RSS_SOURCES[0].name).toBe('雷峰网')
     expect(RSS_SOURCES[1].name).toBe('量子位')
   })
 })

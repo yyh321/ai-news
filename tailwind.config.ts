@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#2563EB',
-        'source-jiqizhixin': '#2563EB',
+        'source-leiphone': '#2563EB',
         'source-qbitai': '#10B981',
         'source-default': '#8B5CF6',
         'source-search': '#F59E0B',

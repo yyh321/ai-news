@@ -6,7 +6,7 @@ export interface FetchRSSResult {
 }
 
 export const RSS_SOURCES = [
-  { name: '机器之心', url: 'https://www.jiqizhixin.com/rss', color: 'source-jiqizhixin' },
+  { name: '雷峰网', url: 'https://www.leiphone.com/feed', color: 'source-leiphone' },
   { name: '量子位', url: 'https://www.qbitai.com/feed', color: 'source-qbitai' },
   { name: 'Synced Review', url: 'https://syncedreview.com/feed/', color: 'source-default' },
   { name: 'Paper Digest', url: 'https://www.paperdigest.org/feed/', color: 'source-default' },
