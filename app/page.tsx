@@ -16,7 +16,6 @@ export default async function Home({
   const { items, date: currentDate } = await getNewsHandler(date)
   console.log('[page] rendered items:', items.length, 'currentDate:', currentDate)
 
-  // Generate last 7 days for date selector
   const today = new Date()
   const availableDates = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(today)
@@ -25,10 +24,12 @@ export default async function Home({
   })
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8">
-      <Header currentDate={currentDate} availableDates={availableDates} />
-      <NewsList items={items} />
-      <Footer />
+    <div className="min-h-screen bg-gray-50">
+      <div className="mx-auto max-w-3xl px-4 py-10">
+        <Header currentDate={currentDate} availableDates={availableDates} />
+        <NewsList items={items} />
+        <Footer />
+      </div>
     </div>
   )
 }

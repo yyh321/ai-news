@@ -1,6 +1,3 @@
-'use client'
-
-import { useState } from 'react'
 import { NewsItem } from '@/lib/types'
 import { formatRelativeTime } from '@/lib/date'
 
@@ -9,59 +6,43 @@ interface NewsCardProps {
   index: number
 }
 
-const sourceColors: Record<string, string> = {
-  '雷峰网': 'bg-source-leiphone',
-  '量子位': 'bg-source-qbitai',
-  '搜索补充': 'bg-source-search',
+const sourceBadgeStyles: Record<string, string> = {
+  '雷峰网': 'bg-blue-50 text-blue-700',
+  '量子位': 'bg-emerald-50 text-emerald-700',
+  '搜索补充': 'bg-amber-50 text-amber-700',
+  'Synced Review': 'bg-violet-50 text-violet-700',
+  'Paper Digest': 'bg-violet-50 text-violet-700',
 }
 
 export default function NewsCard({ news, index }: NewsCardProps) {
-  const [expanded, setExpanded] = useState(false)
-  const colorClass = sourceColors[news.source] || 'bg-source-default'
+  const badgeStyle = sourceBadgeStyles[news.source] || 'bg-gray-50 text-gray-600'
 
   return (
-    <article
-      className={`relative rounded-xl border border-gray-200 p-5 transition-all duration-200 hover:border-primary hover:shadow-md ${
-        expanded ? 'border-primary shadow-md' : ''
-      }`}
-    >
-      <div className={`absolute left-0 top-5 h-12 w-1 rounded-r ${colorClass}`} />
+    <article className="group rounded-2xl bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <a
+        href={news.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block"
+      >
+        <h3 className="text-lg font-semibold text-gray-900 transition-colors duration-200 group-hover:text-blue-600">
+          <span className="mr-2 text-blue-500">{index + 1}.</span>
+          {news.title}
+        </h3>
+      </a>
 
-      <div className="pl-3">
-        <div className="flex items-start justify-between">
-          <h3 className="text-lg font-semibold text-gray-900">
-            <span className="mr-2 text-primary">{index + 1}.</span>
-            {news.title}
-          </h3>
-        </div>
-
-        <p className="mt-1 text-sm text-gray-500">
-          {news.source} · {formatRelativeTime(news.publishedAt)}
-        </p>
-
-        <p className="mt-3 text-sm leading-relaxed text-gray-600">{news.summary}</p>
-
-        {expanded && (
-          <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
-            <p className="text-sm leading-relaxed text-gray-700">{news.fullSummary}</p>
-            <a
-              href={news.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center text-sm font-medium text-primary hover:underline"
-            >
-              🔗 阅读原文
-            </a>
-          </div>
-        )}
-
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="mt-3 text-sm font-medium text-primary hover:text-blue-700 focus:outline-none"
-        >
-          {expanded ? '▲ 点击收起' : '▼ 点击展开'}
-        </button>
+      <div className="mt-2 flex items-center gap-2">
+        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${badgeStyle}`}>
+          {news.source}
+        </span>
+        <span className="text-xs text-gray-400">
+          {formatRelativeTime(news.publishedAt)}
+        </span>
       </div>
+
+      <p className="mt-3 text-sm leading-relaxed text-gray-600">
+        {news.summary}
+      </p>
     </article>
   )
 }
