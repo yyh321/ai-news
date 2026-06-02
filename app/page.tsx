@@ -4,8 +4,6 @@ import Footer from '@/components/Footer'
 import { getNewsHandler } from '@/lib/handlers/news'
 import { formatDate } from '@/lib/date'
 
-export const revalidate = 3600 // ISR: revalidate every hour
-
 export default async function Home({
   searchParams,
 }: {
