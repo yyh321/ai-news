@@ -1,3 +1,5 @@
+'use client'
+
 import { formatDate } from '@/lib/date'
 
 interface HeaderProps {
