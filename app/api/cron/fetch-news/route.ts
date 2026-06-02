@@ -3,10 +3,12 @@ import { fetchNewsHandler } from '@/lib/handlers/cron'
 
 export async function GET(request: NextRequest) {
   console.log('[api/cron] received request')
-  // Verify cron secret
+  const crSecret = process.env.CRON_SECRET
+  console.log('[api/cron] CRON_SECRET set:', crSecret ? 'YES' : 'NO')
+  // Verify cron secret (skip if not configured so manual Run from dashboard works)
   const authHeader = request.headers.get('authorization')
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    console.log('[api/cron] unauthorized')
+  if (crSecret && authHeader !== `Bearer ${crSecret}`) {
+    console.log('[api/cron] unauthorized. header present:', authHeader ? 'YES' : 'NO')
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
