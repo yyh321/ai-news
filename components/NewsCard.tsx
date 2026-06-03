@@ -66,7 +66,7 @@ export default function NewsCard({ news, index }: NewsCardProps) {
                 {news.source}
               </span>
               <span className="inline-flex items-center gap-1 text-xs text-slate-400">
-                <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-3 w-3 flex-shrink-0" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {formatRelativeTime(news.publishedAt)}
@@ -79,7 +79,7 @@ export default function NewsCard({ news, index }: NewsCardProps) {
 
             <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-slate-400 transition-all duration-200 group-hover:gap-2 group-hover:text-blue-600">
               阅读全文
-              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-3 w-3 flex-shrink-0" width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </div>

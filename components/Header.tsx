@@ -47,6 +47,8 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
             </select>
             <svg
               className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+              width="16"
+              height="16"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
