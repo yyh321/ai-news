@@ -60,18 +60,18 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
             <button
               type="button"
               onClick={() => setIsOpen((open) => !open)}
-              className="flex h-13 w-full items-center justify-between gap-3 rounded-2xl bg-white px-3 py-2 text-left shadow-sm ring-1 ring-slate-200 transition-all duration-200 hover:shadow-md hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300/70 sm:w-56"
+              className="flex h-13 w-full items-center justify-between gap-3 rounded-2xl bg-white px-3 py-2 text-left shadow-sm ring-1 ring-slate-200 transition-all duration-200 hover:shadow-md hover:ring-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300/70 sm:w-64"
               aria-haspopup="listbox"
               aria-expanded={isOpen}
             >
-              <span className="flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500">
+              <span className="flex min-w-0 items-center gap-3">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-500">
                   <svg width="16" height="16" className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3M5 11h14M6 21h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </span>
-                <span>
-                  <span className="block text-sm font-semibold text-slate-800">
+                <span className="min-w-0">
+                  <span className="block whitespace-nowrap text-sm font-semibold text-slate-800">
                     {getDateLabel(currentDate)}
                   </span>
                   <span className="block text-xs text-slate-400">
@@ -92,7 +92,7 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
             </button>
 
             {isOpen ? (
-              <div className="absolute right-0 z-20 mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white/95 p-1.5 shadow-xl shadow-slate-200/60 backdrop-blur sm:w-56">
+              <div className="absolute right-0 z-20 mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white/95 p-1.5 shadow-xl shadow-slate-200/60 backdrop-blur sm:w-64">
                 <div className="max-h-72 space-y-1 overflow-auto" role="listbox">
                   {availableDates.map((date) => {
                     const isActive = date === currentDate
@@ -101,7 +101,7 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
                         key={date}
                         type="button"
                         onClick={() => handleDateChange(date)}
-                        className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
+                        className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors ${
                           isActive
                             ? 'bg-slate-900 font-semibold text-white'
                             : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
@@ -109,9 +109,9 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
                         role="option"
                         aria-selected={isActive}
                       >
-                        <span>{getDateLabel(date)}</span>
+                        <span className="whitespace-nowrap">{getDateLabel(date)}</span>
                         {isActive ? (
-                          <svg width="16" height="16" className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg width="16" height="16" className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         ) : null}
