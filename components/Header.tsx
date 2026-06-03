@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { formatDate } from '@/lib/date'
 
 interface HeaderProps {
@@ -9,7 +10,17 @@ interface HeaderProps {
 }
 
 export default function Header({ currentDate, onDateChange, availableDates = [] }: HeaderProps) {
+  const router = useRouter()
   const today = formatDate(new Date().toISOString())
+
+  const handleDateChange = (date: string) => {
+    if (onDateChange) {
+      onDateChange(date)
+      return
+    }
+
+    router.push(`/?date=${encodeURIComponent(date)}`)
+  }
 
   return (
     <header className="mb-12">
@@ -36,7 +47,7 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
           <div className="relative">
             <select
               value={currentDate}
-              onChange={(e) => onDateChange?.(e.target.value)}
+              onChange={(e) => handleDateChange(e.target.value)}
               className="appearance-none rounded-xl border border-slate-200 bg-white/80 py-2.5 pl-4 pr-10 text-sm font-medium text-slate-700 shadow-sm backdrop-blur transition-all hover:border-slate-300 hover:shadow focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300/40"
             >
               {availableDates.map((date) => (
