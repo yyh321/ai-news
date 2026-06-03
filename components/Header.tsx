@@ -14,10 +14,10 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
   return (
     <header className="mb-12">
       {/* 顶部标识 */}
-      <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/60 px-3 py-1 text-xs font-medium text-blue-600 shadow-sm backdrop-blur">
+      <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
         </span>
         Daily AI Briefing
       </div>
@@ -37,7 +37,7 @@ export default function Header({ currentDate, onDateChange, availableDates = [] 
             <select
               value={currentDate}
               onChange={(e) => onDateChange?.(e.target.value)}
-              className="appearance-none rounded-xl border border-slate-200 bg-white/80 py-2.5 pl-4 pr-10 text-sm font-medium text-slate-700 shadow-sm backdrop-blur transition-all hover:border-blue-300 hover:shadow focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="appearance-none rounded-xl border border-slate-200 bg-white/80 py-2.5 pl-4 pr-10 text-sm font-medium text-slate-700 shadow-sm backdrop-blur transition-all hover:border-slate-300 hover:shadow focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300/40"
             >
               {availableDates.map((date) => (
                 <option key={date} value={date}>

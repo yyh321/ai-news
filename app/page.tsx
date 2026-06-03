@@ -27,7 +27,7 @@ export default async function Home({
     <div className="relative min-h-screen overflow-hidden bg-slate-50">
       {/* 装饰背景 */}
       <div className="pointer-events-none absolute inset-0 -z-0">
-        <div className="absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-br from-blue-200/40 via-indigo-200/30 to-transparent blur-3xl" />
+        <div className="absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full bg-gradient-to-br from-slate-200/70 via-stone-100/50 to-transparent blur-3xl" />
         <div className="absolute top-60 -right-40 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-violet-200/30 to-transparent blur-3xl" />
         <div className="absolute bottom-0 -left-40 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-emerald-100/40 to-transparent blur-3xl" />
       </div>
