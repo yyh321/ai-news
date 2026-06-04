@@ -17,6 +17,7 @@ const sourceBadgeStyles: Record<string, string> = {
 function cleanText(text: string): string {
   return text
     .replace(/&(?:amp;)?nbsp;?|&#160;|&#xA0;/gi, ' ')
+    .replace(/&(?:amp;)?quot;?/gi, '')
     .replace(/\u00a0/g, ' ')
     .replace(/\s+\.\.\./g, '...')
     .replace(/\s+/g, ' ')

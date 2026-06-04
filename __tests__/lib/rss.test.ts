@@ -15,6 +15,10 @@ describe('stripHtml', () => {
   it('removes non-breaking space entities', () => {
     expect(stripHtml('AI&nbsp;News&amp;nbsp;Today&nbsp...')).toBe('AI News Today ...')
   })
+
+  it('removes quote entities', () => {
+    expect(stripHtml('从&quot;各自为战&quot;到&amp;quot;共生共筑&amp;quot;')).toBe('从各自为战到共生共筑')
+  })
 })
 
 describe('parseRSS', () => {

@@ -48,4 +48,19 @@ describe('NewsCard', () => {
     expect(screen.queryByText(/点击展开/)).not.toBeInTheDocument()
     expect(screen.queryByText(/点击收起/)).not.toBeInTheDocument()
   })
+
+  it('removes quote entities from title', () => {
+    render(
+      <NewsCard
+        news={{
+          ...mockNews,
+          title: '从&quot;各自为战&quot;到&amp;quot;共生共筑&amp;quot;',
+        }}
+        index={7}
+      />
+    )
+
+    expect(screen.getByText(/从各自为战到共生共筑/)).toBeInTheDocument()
+    expect(screen.queryByText(/&quot;/)).not.toBeInTheDocument()
+  })
 })
