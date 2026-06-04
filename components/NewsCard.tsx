@@ -14,8 +14,18 @@ const sourceBadgeStyles: Record<string, string> = {
   'Paper Digest': 'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-100',
 }
 
+function cleanText(text: string): string {
+  return text
+    .replace(/&nbsp;|&#160;|&#xA0;/gi, ' ')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 export default function NewsCard({ news, index }: NewsCardProps) {
   const badge = sourceBadgeStyles[news.source] || 'bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-200'
+  const title = cleanText(news.title)
+  const summary = cleanText(news.summary)
 
   return (
     <article className="group rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md">
@@ -29,7 +39,7 @@ export default function NewsCard({ news, index }: NewsCardProps) {
           <span className="mr-2 inline-block text-sm font-bold tabular-nums text-slate-400">
             {String(index + 1).padStart(2, '0')}
           </span>
-          {news.title}
+          {title}
         </h3>
 
         <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -42,7 +52,7 @@ export default function NewsCard({ news, index }: NewsCardProps) {
         </div>
 
         <p className="mt-3 text-sm leading-relaxed text-slate-600">
-          {news.summary}
+          {summary}
         </p>
       </a>
     </article>

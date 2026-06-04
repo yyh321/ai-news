@@ -27,6 +27,22 @@ describe('NewsCard', () => {
     expect(screen.getByText('Brief summary...')).toBeInTheDocument()
   })
 
+  it('removes non-breaking space entities from rendered content', () => {
+    render(
+      <NewsCard
+        news={{
+          ...mockNews,
+          title: 'AI&nbsp;News',
+          summary: '外骨骼落地，&nbsp;&nbsp;作者 | 郑佳美&#160;&#xA0;更多',
+        }}
+        index={0}
+      />
+    )
+
+    expect(screen.getByText(/AI News/)).toBeInTheDocument()
+    expect(screen.getByText('外骨骼落地， 作者 | 郑佳美 更多')).toBeInTheDocument()
+  })
+
   it('does not render expand button', () => {
     render(<NewsCard news={mockNews} index={0} />)
     expect(screen.queryByText(/点击展开/)).not.toBeInTheDocument()
