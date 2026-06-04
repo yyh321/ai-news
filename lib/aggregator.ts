@@ -10,6 +10,21 @@ export function generateId(url: string): string {
   return Math.abs(hash).toString(36)
 }
 
+function normalizeText(text: string): string {
+  return text
+    .replace(/&(?:amp;)?nbsp;?|&#160;|&#xA0;/gi, ' ')
+    .replace(/&(?:amp;)?quot;?/gi, '')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+}
+
+function normalizeTitle(title: string): string {
+  return normalizeText(title)
+    .replace(/[^一-龥a-z0-9]+/gi, '')
+}
+
 function createSummary(description: string, maxLength: number): string {
   if (!description) return ''
   if (description.length <= maxLength) return description
@@ -27,13 +42,29 @@ function parsePubDate(pubDate?: string): string {
   }
 }
 
+export function dedupeNewsItems(items: NewsItem[]): NewsItem[] {
+  const seen = new Set<string>()
+  const uniqueItems: NewsItem[] = []
+
+  for (const item of items) {
+    const key = normalizeTitle(item.title) || item.sourceUrl
+    if (seen.has(key)) continue
+    seen.add(key)
+    uniqueItems.push(item)
+  }
+
+  return uniqueItems
+}
+
 export function aggregateNews(rawItems: RawNewsItem[]): NewsItem[] {
   const seen = new Set<string>()
   const uniqueItems: RawNewsItem[] = []
 
   for (const item of rawItems) {
-    if (seen.has(item.link)) continue
+    const key = normalizeTitle(item.title) || item.link
+    if (seen.has(item.link) || seen.has(key)) continue
     seen.add(item.link)
+    seen.add(key)
     uniqueItems.push(item)
   }
 

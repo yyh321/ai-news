@@ -1,4 +1,4 @@
-import { aggregateNews, generateId } from '@/lib/aggregator'
+import { aggregateNews, dedupeNewsItems, generateId } from '@/lib/aggregator'
 import { RawNewsItem } from '@/lib/types'
 
 describe('aggregateNews', () => {
@@ -31,6 +31,57 @@ describe('aggregateNews', () => {
     expect(result).toHaveLength(2)
     expect(result[0].title).toBe('A')
     expect(result[1].title).toBe('B')
+  })
+
+  it('deduplicates by normalized title', () => {
+    const items: RawNewsItem[] = [
+      {
+        title: 'NUS 余浩泳教授：外骨骼的轻量化与任务感知 | ICRA 2026',
+        link: 'https://a.com/one',
+        description: 'Desc A',
+        pubDate: 'Mon, 01 Jun 2026 10:00:00 GMT',
+        sourceName: '雷峰网',
+      },
+      {
+        title: 'NUS 余浩泳教授：外骨骼的轻量化与任务感知｜ICRA 2026',
+        link: 'https://a.com/two',
+        description: 'Desc B',
+        pubDate: 'Mon, 01 Jun 2026 09:00:00 GMT',
+        sourceName: '雷峰网',
+      },
+    ]
+
+    const result = aggregateNews(items)
+    expect(result).toHaveLength(1)
+    expect(result[0].sourceUrl).toBe('https://a.com/one')
+  })
+
+  it('deduplicates already stored items by normalized title', () => {
+    const result = dedupeNewsItems([
+      {
+        id: '1',
+        title: '从&quot;各自为战&quot;到&quot;共生共筑&quot;',
+        summary: 'A',
+        fullSummary: 'A',
+        source: '雷峰网',
+        sourceUrl: 'https://a.com/one',
+        publishedAt: '2026-06-01T10:00:00.000Z',
+        fetchedAt: '2026-06-01T10:00:00.000Z',
+      },
+      {
+        id: '2',
+        title: '从各自为战到共生共筑',
+        summary: 'B',
+        fullSummary: 'B',
+        source: '雷峰网',
+        sourceUrl: 'https://a.com/two',
+        publishedAt: '2026-06-01T09:00:00.000Z',
+        fetchedAt: '2026-06-01T10:00:00.000Z',
+      },
+    ])
+
+    expect(result).toHaveLength(1)
+    expect(result[0].sourceUrl).toBe('https://a.com/one')
   })
 
   it('generates summary and fullSummary', () => {

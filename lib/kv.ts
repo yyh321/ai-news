@@ -1,4 +1,5 @@
 import { kv } from '@vercel/kv'
+import { dedupeNewsItems } from './aggregator'
 import { NewsItem } from './types'
 
 export async function getNewsByDate(date: string): Promise<NewsItem[] | null> {
@@ -7,9 +8,9 @@ export async function getNewsByDate(date: string): Promise<NewsItem[] | null> {
   if (!data) return null
   try {
     if (typeof data === 'string') {
-      return JSON.parse(data) as NewsItem[]
+      return dedupeNewsItems(JSON.parse(data) as NewsItem[])
     }
-    return data as unknown as NewsItem[]
+    return dedupeNewsItems(data as unknown as NewsItem[])
   } catch {
     return null
   }
