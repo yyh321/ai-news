@@ -33,14 +33,14 @@ describe('NewsCard', () => {
         news={{
           ...mockNews,
           title: 'AI&nbsp;News',
-          summary: '外骨骼落地，&nbsp;&nbsp;作者 | 郑佳美&#160;&#xA0;更多',
+          summary: '外骨骼落地，&nbsp;&nbsp;作者 | 郑佳美&nbsp...',
         }}
         index={0}
       />
     )
 
     expect(screen.getByText(/AI News/)).toBeInTheDocument()
-    expect(screen.getByText('外骨骼落地， 作者 | 郑佳美 更多')).toBeInTheDocument()
+    expect(screen.getByText('外骨骼落地， 作者 | 郑佳美...')).toBeInTheDocument()
   })
 
   it('does not render expand button', () => {

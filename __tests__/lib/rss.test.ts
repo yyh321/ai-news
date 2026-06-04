@@ -13,7 +13,7 @@ describe('stripHtml', () => {
   })
 
   it('removes non-breaking space entities', () => {
-    expect(stripHtml('AI&nbsp;News&#160;Today&#xA0;')).toBe('AI News Today')
+    expect(stripHtml('AI&nbsp;News&amp;nbsp;Today&nbsp...')).toBe('AI News Today ...')
   })
 })
 
