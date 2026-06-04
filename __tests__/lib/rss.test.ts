@@ -11,6 +11,10 @@ describe('stripHtml', () => {
   it('normalizes whitespace', () => {
     expect(stripHtml('  a   b  ')).toBe('a b')
   })
+
+  it('removes non-breaking space entities', () => {
+    expect(stripHtml('AI&nbsp;News&#160;Today&#xA0;')).toBe('AI News Today')
+  })
 })
 
 describe('parseRSS', () => {

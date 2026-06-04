@@ -13,7 +13,12 @@ export const RSS_SOURCES = [
 ]
 
 export function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+  return html
+    .replace(/&nbsp;|&#160;|&#xA0;/gi, ' ')
+    .replace(/<[^>]*>/g, '')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 export function parseRSS(xml: string, sourceName: string): RawNewsItem[] {
